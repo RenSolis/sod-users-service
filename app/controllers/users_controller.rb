@@ -55,6 +55,16 @@ class UsersController < Sinatra::Base
     end
   end
 
+  post '/api/v1/users/:name/sessions' do
+    user = User.find_by(name: params[:name], password: user_params['password'])
+
+    if user
+      user.to_json
+    else
+      error 400, { error: 'invalid login credentials' }.to_json
+    end
+  end
+
   helpers do
     def user_params
       begin

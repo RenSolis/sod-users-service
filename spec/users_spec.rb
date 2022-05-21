@@ -89,4 +89,22 @@ RSpec.describe UsersController do
       expect(last_response).to be_not_found
     end
   end
+
+  describe 'POST /api/v1/users/:name/sessions' do
+    it 'should return the user object on valid credentials' do
+      puts "USER: #{user.inspect}"
+      post "/api/v1/users/#{user.name}/sessions", { password: user.password }.to_json
+
+      expect(last_response).to be_ok
+
+      attributes = JSON.parse(last_response.body)
+      expect(attributes['name']).to eq user.name
+    end
+
+    it 'should fail on invalid credentials' do
+      post "/api/v1/users/#{user.name}/sessions", { password: 'invalid' }.to_json
+
+      expect(last_response).to be_bad_request
+    end
+  end
 end
