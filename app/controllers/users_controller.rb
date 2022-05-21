@@ -1,12 +1,12 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 
-class Users < Sinatra::Base
+class UsersController < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
 
-  get '/users' do
-    'AAAAAAA causaaa'
+  get '/api/v1/users' do
+    User.all.to_json
   end
 end

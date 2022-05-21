@@ -1,6 +1,6 @@
 require 'sinatra'
 require './service'
-require_relative 'app/controllers/users'
+require_relative 'app/controllers/users_controller'
 
-use Users
+use UsersController
 run Service
