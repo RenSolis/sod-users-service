@@ -30,6 +30,31 @@ class UsersController < Sinatra::Base
     end
   end
 
+  put '/api/v1/users/:name' do
+    user = User.find_by(name: params[:name])
+
+    if user
+      if user.update(user_params)
+        user.to_json
+      else
+        error 400, user.errors.to_json
+      end
+    else
+      error 404, { error: 'user not found' }.to_json
+    end
+  end
+
+  delete '/api/v1/users/:name' do
+    user = User.find_by(name: params[:name])
+
+    if user
+      user.destroy
+      user.to_json
+    else
+      error 404, { error: 'user not found' }.to_json
+    end
+  end
+
   helpers do
     def user_params
       begin
