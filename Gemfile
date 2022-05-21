@@ -7,3 +7,6 @@ gem 'sinatra-reloader'
 
 gem 'sinatra-activerecord'
 gem 'sqlite3'
+
+gem 'rspec'
+gem 'rack-test'
