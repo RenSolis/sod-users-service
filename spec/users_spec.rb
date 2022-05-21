@@ -46,4 +46,20 @@ RSpec.describe UsersController do
       expect(last_response.status).to eq 404
     end
   end
+
+  describe 'POST /api/v1/users' do
+    it 'should create a user' do
+      params = { name: 'user', email: 'new_user@test.com', password: 'password', bio: 'worker' }
+      post '/api/v1/users', params.to_json, { 'Content-Type': 'application/json' }
+
+      expect(last_response.status).to eq 200
+
+      get "/api/v1/users/#{params[:name]}"
+
+      attributes = JSON.parse(last_response.body)
+      expect(attributes['name']).to eq params[:name]
+      expect(attributes['email']).to eq params[:email]
+      expect(attributes['bio']).to eq params[:bio]
+    end
+  end
 end

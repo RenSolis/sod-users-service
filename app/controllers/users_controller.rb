@@ -19,4 +19,24 @@ class UsersController < Sinatra::Base
       error 404, { error: 'user not found' }.to_json
     end
   end
+
+  post '/api/v1/users' do
+    user = User.new(user_params)
+
+    if user.save
+      user.to_json
+    else
+      error 400, user.errors.to_json
+    end
+  end
+
+  helpers do
+    def user_params
+      begin
+        JSON.parse(request.body.read)
+      rescue => e
+        error 400, { message: 'Invalid JSON' }.to_json
+      end
+    end
+  end
 end

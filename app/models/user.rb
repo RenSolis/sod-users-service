@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  validates_uniqueness_of :name, :email
+  # validates :name, presence: true, uniqueness: true
+  # validates :email, presence: true, uniqueness: true
 
   def to_json
     super(except: :password)
