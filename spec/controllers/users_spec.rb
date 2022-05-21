@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe UsersController do
+  # you neeed to provide app with the controller for use with sinatra
   def app
     UsersController
   end
@@ -92,7 +93,6 @@ RSpec.describe UsersController do
 
   describe 'POST /api/v1/users/:name/sessions' do
     it 'should return the user object on valid credentials' do
-      puts "USER: #{user.inspect}"
       post "/api/v1/users/#{user.name}/sessions", { password: user.password }.to_json
 
       expect(last_response).to be_ok

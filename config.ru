@@ -1,6 +1,6 @@
 require 'sinatra'
 require './service'
-require_relative 'app/controllers/users_controller'
+require './config/environment'
 
 use UsersController
 run Service

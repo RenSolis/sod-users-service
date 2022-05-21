@@ -1,8 +1,5 @@
 ENV['SINATRA_ENV'] = 'test'
 
-require 'bundler/setup'
-Bundler.require(:default, ENV['SINATRA_ENV'])
-
 require './config/environment'
 
 RSpec.configure do |config|
